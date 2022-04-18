@@ -1,10 +1,7 @@
-
-
+import PlayerMenu from './components/PlayerMenu'
 function App() {
   return (
-    <div className="App">
-
-    </div>
+    <PlayerMenu />
   );
 }
 
