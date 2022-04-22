@@ -1,27 +1,34 @@
 // this component will house an image and a dropdown menu
-// additionally it will hold a current color context for each 
+// additionally it will hold a current color context for each
 // card
-import React from 'react'
-import { Card, CardContent, CardMedia, Grid } from '@mui/material'
-import DropdownMenu from './DropdownMenu'
+import React, { useState, useMemo } from "react";
+import { Card, CardContent, CardMedia, Grid } from "@mui/material";
+import DropdownMenu from "./DropdownMenu";
+import { PlayerColorContext } from "../contexts/PlayerColorContext";
+import { shadows } from "@mui/system";
 
 function PlayerCard() {
+  const [playerColor, setPlayerColor] = useState("");
+
+  const providerPlayerColor = useMemo(() => ({playerColor, setPlayerColor}), [playerColor, setPlayerColor]);
+
   return (
-    <Grid item sx={6}>
-      <Card>
-        <CardMedia 
-          component='img'
-          height='140'
-          image='https://i.stack.imgur.com/l60Hf.png'
-        />
-        <CardContent>
-          <DropdownMenu />
-        </CardContent>
-
-      </Card>
-
+    <Grid item>
+      <PlayerColorContext.Provider value={providerPlayerColor} >
+        <Card>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://i.stack.imgur.com/l60Hf.png"
+            className={playerColor}
+          />
+          <CardContent>
+            <DropdownMenu />
+          </CardContent>
+        </Card>
+      </PlayerColorContext.Provider>
     </Grid>
-  )
+  );
 }
 
-export default PlayerCard
+export default PlayerCard;

@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.red
+{
+  filter: opacity(0.4) drop-shadow(0 0 0 red) !important;
+}
+
+.blue
+{
+  filter: opacity(0.4) drop-shadow(0 0 0 blue) !important;
+}
+
+.green
+{
+  filter: opacity(0.4) drop-shadow(0 0 0 green) !important;
+}
+
+.yellow
+{
+  filter: opacity(0.4) drop-shadow(0 0 0 yellow) !important;
+}
