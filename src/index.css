@@ -15,19 +15,23 @@ code {
 .red
 {
   filter: opacity(0.4) drop-shadow(0 0 0 red) !important;
+  transition: filter 0.4s ease-out;
 }
 
 .blue
 {
   filter: opacity(0.4) drop-shadow(0 0 0 blue) !important;
+  transition: filter 0.4s ease-out;
 }
 
 .green
 {
   filter: opacity(0.4) drop-shadow(0 0 0 green) !important;
+  transition: filter 0.4s ease-out;
 }
 
 .yellow
 {
   filter: opacity(0.4) drop-shadow(0 0 0 yellow) !important;
+  transition: filter 0.4s ease-out;
 }

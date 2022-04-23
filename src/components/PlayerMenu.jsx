@@ -9,7 +9,7 @@ import { AvailableColorsContext } from '../contexts/AvailableColorsContext'
 
 function PlayerMenu() {
   const [availableColors, setAvailableColors] = useState([
-    {name: " ", id:"" , value: "", available: true},
+    {name: "None", id:"" , value: "", available: true},
     {name: "Red", id:"0" , value: "red", available: true},
     {name: "Blue", id: "1" , value: "blue", available: true},
     {name: "Green", id: "2", value: "green", available: true},
