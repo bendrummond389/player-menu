@@ -5,7 +5,6 @@ import React, { useState, useMemo } from "react";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import DropdownMenu from "./DropdownMenu";
 import { PlayerColorContext } from "../contexts/PlayerColorContext";
-import { shadows } from "@mui/system";
 
 function PlayerCard() {
   const [playerColor, setPlayerColor] = useState("");

@@ -11,27 +11,27 @@ function DropdownMenu() {
     AvailableColorsContext
   );
 
-  function toggleAvailableColors( value) {
+  const toggleAvailableColors = (value) => {
     let newArray = [...availableColors];
-      let index = availableColors.findIndex(
-        (color) => color.value === playerColor
-      );
-      newArray[index].available = value;
-      setAvailableColors(newArray);
-  };
+    let index = availableColors.findIndex(
+      (color) => color.value === playerColor
+    );
+    newArray[index].available = value;
+    setAvailableColors(newArray);
+  }
 
   const handleChange = (e) => {
-    if (playerColor){
-      toggleAvailableColors(true)
+    if (playerColor) {
+      toggleAvailableColors(true);
     }
     setPlayerColor(e.target.value);
   };
 
   useEffect(() => {
     if (playerColor) {
-      toggleAvailableColors(false)
+      toggleAvailableColors(false);
     }
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [playerColor]);
 
   let colorList = availableColors.map((color) => (
