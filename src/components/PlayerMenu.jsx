@@ -23,10 +23,10 @@ function PlayerMenu() {
   return (
     <AvailableColorsContext.Provider value={providerAvailableColor}>
       <Grid container justifyContent="center" spacing={10} marginTop={1}>
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
+        <PlayerCard id='1'/>
+        <PlayerCard id='2'/>
+        <PlayerCard id='3'/>
+        <PlayerCard id='4'/>
       </Grid>
     </AvailableColorsContext.Provider>
   )

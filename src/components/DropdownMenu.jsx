@@ -5,6 +5,8 @@ import { AvailableColorsContext } from "../contexts/AvailableColorsContext";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { PlayerColorContext } from "../contexts/PlayerColorContext";
 
+
+
 function DropdownMenu() {
   const { playerColor, setPlayerColor } = useContext(PlayerColorContext);
   const { availableColors, setAvailableColors } = useContext(
@@ -20,11 +22,13 @@ function DropdownMenu() {
     setAvailableColors(newArray);
   }
 
+
   const handleChange = (e) => {
     if (playerColor) {
       toggleAvailableColors(true);
     }
     setPlayerColor(e.target.value);
+    getMessage()
   };
 
   useEffect(() => {

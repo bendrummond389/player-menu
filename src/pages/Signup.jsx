@@ -8,12 +8,14 @@ import {
   Container,
   Alert,
 } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Signup() {
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  let navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,6 +29,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(data.get("email"), data.get("password"));
+      navigate('/')
     } catch {
       setError("Failed to create account");
     }
@@ -46,7 +49,7 @@ export default function Signup() {
       >
         <Card sx={{ padding: 5 }}>
           <Typography component="h1" variant="h4">
-            Sign in
+            Sign Up
           </Typography>
           <Box
             component="form"
@@ -96,6 +99,7 @@ export default function Signup() {
             </Button>
           </Box>
         </Card>
+          Already have an account? <Link to="/login">Log In</Link>
       </Box>
     </Container>
   );
