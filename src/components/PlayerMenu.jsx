@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react'
 import { Grid } from '@mui/material'
 import PlayerCard from './PlayerCard'
 import { AvailableColorsContext } from '../contexts/AvailableColorsContext'
-
+import Navbar from "./Navbar"
 
 
 function PlayerMenu() {
@@ -22,6 +22,7 @@ function PlayerMenu() {
 
   return (
     <AvailableColorsContext.Provider value={providerAvailableColor}>
+    <Navbar />
       <Grid container justifyContent="center" spacing={10} marginTop={1}>
         <PlayerCard id='0'/>
         <PlayerCard id='1'/>
