@@ -35,3 +35,9 @@ code {
   filter: opacity(0.4) drop-shadow(0 0 0 yellow) !important;
   transition: filter 0.4s ease-out;
 }
+
+.none
+{
+  filter: opacity(1) drop-shadow(0 0 0 yellow) !important;
+  transition: filter 0.4s ease-out;
+}

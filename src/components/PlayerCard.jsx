@@ -1,10 +1,11 @@
 // this component will house an image and a dropdown menu
 // additionally it will hold a current color context for each
 // card
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import DropdownMenu from "./DropdownMenu";
 import { PlayerColorContext } from "../contexts/PlayerColorContext";
+
 
 function PlayerCard(props) {
   const [playerColor, setPlayerColor] = useState("");
@@ -26,7 +27,7 @@ function PlayerCard(props) {
             className={playerColor}
           />
           <CardContent>
-            <DropdownMenu />
+            <DropdownMenu id={props.id}/>
           </CardContent>
         </Card>
       </PlayerColorContext.Provider>

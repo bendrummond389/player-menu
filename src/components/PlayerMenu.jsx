@@ -9,11 +9,11 @@ import { AvailableColorsContext } from '../contexts/AvailableColorsContext'
 
 function PlayerMenu() {
   const [availableColors, setAvailableColors] = useState([
-    {name: "None", id:"" , value: "", available: true},
-    {name: "Red", id:"0" , value: "red", available: true},
-    {name: "Blue", id: "1" , value: "blue", available: true},
-    {name: "Green", id: "2", value: "green", available: true},
-    {name: "Yellow", id: "3", value: "yellow", available: true},
+    {name: "None", id:"0" , value: "none", available: true},
+    {name: "Red", id:"1" , value: "red", available: true},
+    {name: "Blue", id: "2" , value: "blue", available: true},
+    {name: "Green", id: "3", value: "green", available: true},
+    {name: "Yellow", id: "4", value: "yellow", available: true},
   ])
 
   const providerAvailableColor = useMemo(() => (
@@ -23,10 +23,10 @@ function PlayerMenu() {
   return (
     <AvailableColorsContext.Provider value={providerAvailableColor}>
       <Grid container justifyContent="center" spacing={10} marginTop={1}>
+        <PlayerCard id='0'/>
         <PlayerCard id='1'/>
         <PlayerCard id='2'/>
         <PlayerCard id='3'/>
-        <PlayerCard id='4'/>
       </Grid>
     </AvailableColorsContext.Provider>
   )
