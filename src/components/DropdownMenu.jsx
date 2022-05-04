@@ -37,7 +37,6 @@ function DropdownMenu(props) {
   useEffect(() => {
     if (playerColor) {
       toggleAvailableColors(false);
-      console.log(props.id, playerColor)
       const updatePlayer = httpsCallable(functions, "updatePlayerColor");
       updatePlayer({ index: props.id, color: playerColor });
     }
