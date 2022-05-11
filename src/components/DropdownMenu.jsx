@@ -3,18 +3,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AvailableColorsContext } from "../contexts/AvailableColorsContext";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { PlayerColorContext } from "../contexts/PlayerColorContext";
-import { functions } from "../firebase";
-import { httpsCallable } from "firebase/functions";
+import { usePlayerColor } from "../contexts/PlayerColorContext";
 
 function DropdownMenu(props) {
-  const { playerColor, setPlayerColor } = useContext(PlayerColorContext);
+  const { getColorFromArray, updateColorInArray } = usePlayerColor();
   const { availableColors, setAvailableColors } = useContext(
     AvailableColorsContext
   );
 
-  const [loaded, setLoaded] = useState(false);
-
+  const index = props.id;
+  const [playerColor, setPlayerColor] = useState(getColorFromArray(index));
+  const [loaded, setLoaded] = useState(true);
 
   const toggleAvailableColors = (value) => {
     if(playerColor != "none"){
@@ -27,33 +26,20 @@ function DropdownMenu(props) {
     }
   }
 
+  useEffect(() => {
+    updateColorInArray(index, playerColor)
+    toggleAvailableColors(false)
+    // eslint-disable-next-line
+  }, [playerColor]);
+
   const handleChange = (e) => {
     if (playerColor) {
       toggleAvailableColors(true);
     }
-    setPlayerColor(e.target.value);
+    setPlayerColor(e.target.value)
+    // updateColorInArray(index, playerColor)
   };
 
-  useEffect(() => {
-    if (playerColor) {
-      toggleAvailableColors(false);
-      const updatePlayer = httpsCallable(functions, "updatePlayerColor");
-      updatePlayer({ index: props.id, color: playerColor });
-    }
-    // eslint-disable-next-line
-  }, [playerColor]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const getPlayer = httpsCallable(functions, "getPlayerColor");
-      let loadColor = await getPlayer({ index: props.id})
-      console.log(loadColor)
-      setPlayerColor(loadColor.data)
-      setLoaded(true)
-    }
-    fetchData()
-    
-  }, [])
 
   let colorList = availableColors.map((color) => (
     <MenuItem

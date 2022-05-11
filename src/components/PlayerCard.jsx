@@ -4,20 +4,18 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import DropdownMenu from "./DropdownMenu";
-import { PlayerColorContext } from "../contexts/PlayerColorContext";
-
+import { usePlayerColor } from "../contexts/PlayerColorContext";
 
 function PlayerCard(props) {
-  const [playerColor, setPlayerColor] = useState("");
+  const { playerColorArray, getColorFromArray, loading } = usePlayerColor();
 
-  const providerPlayerColor = useMemo(
-    () => ({ playerColor, setPlayerColor }),
-    [playerColor, setPlayerColor]
-  );
+  let playerColor = "";
+  useEffect(() => {
+    playerColor = getColorFromArray(props.id);
+  }, [playerColorArray]);
 
   return (
     <Grid item>
-      <PlayerColorContext.Provider value={providerPlayerColor}>
         <Card>
           <Typography variant="h4">Player {props.id}</Typography>
           <CardMedia
@@ -27,10 +25,9 @@ function PlayerCard(props) {
             className={playerColor}
           />
           <CardContent>
-            <DropdownMenu id={props.id}/>
+            <DropdownMenu id={props.id} />
           </CardContent>
         </Card>
-      </PlayerColorContext.Provider>
     </Grid>
   );
 }
