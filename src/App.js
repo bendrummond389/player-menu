@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 import SelectProfileImage from './pages/SelectProfileImage';
 import { ImageProvider } from './contexts/ImageContext';
+import Test from './pages/Test'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
             } />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/test" element={<Test />} />
           </Routes>
         </Router>
       </AuthProvider>
