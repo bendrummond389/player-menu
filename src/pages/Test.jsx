@@ -1,36 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
-import axios from "axios";
-import { Box, Button } from "@mui/material";
-import { async } from "@firebase/util";
-import {
-  addNewUser,
-  updateArrayOnServer,
-} from "../helperFunctions/ServerFunctions";
+import { uploadImageToServer } from "../helperFunctions/ServerFunctions";
+import {useAuth} from "../contexts/AuthContext"
 
 export default function Test() {
+  const { currentUser } = useAuth();
+
+  const [image, setImage] = useState(null)
+
+  const userId = currentUser.uid
+
   const uploadImage = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file)
+    setImage(base64);
     console.log(base64)
-
+    uploadImageToServer(userId, base64)
   }
 
-    const convertBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
+  const convertBase64 = async (file) => {
+    return new Promise((resolve, reject) => {
+      let fileReader = new FileReader()
+      fileReader.readAsDataURL(file)
 
-        fileReader.onload = () => {
-          resolve(fileReader.result);
-        };
 
-        fileReader.onerror = (error) => {
-          reject(error)
-        };
-        
-      });
-    };
+      fileReader.onload = () =>{
+        resolve(fileReader.result);
+      }
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
 
   return (
     <div>
@@ -40,6 +42,8 @@ export default function Test() {
           uploadImage(e);
         }}
       />
+      <img src={image}/>
+
     </div>
   );
 }

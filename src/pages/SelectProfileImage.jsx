@@ -17,9 +17,8 @@ export default function ProfileImage() {
     }
   };
 
-  const handleSubmit = () =>  {
-    uploadImage(image, currentUser.uid)
-    setImage(null)
+  const handleSubmit = async  () =>  {
+    await uploadImage(image, currentUser.uid)
     navigate('/')
   };
 

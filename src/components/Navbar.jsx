@@ -20,7 +20,7 @@ const ResponsiveAppBar = () => {
   const [loaded, setLoaded] = useState(false)
 
 
-  const { imageUrl, loadImage } = useImage();
+  const { image, loadImage } = useImage();
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -53,7 +53,7 @@ const ResponsiveAppBar = () => {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="Remy Sharp"
-                  src={imageUrl ? imageUrl : "/static/images/avatar/2.jpg"}
+                  src={image ? image : "/static/images/avatar/2.jpg"}
                   sx={{
                     height: 80,
                     width: 80,

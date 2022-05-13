@@ -9,7 +9,7 @@ import { usePlayerColor } from "../contexts/PlayerColorContext";
 export default function LogoutButton() {
   const [error, setError] = useState("");
   const { logout } = useAuth();
-  const { removeImage } = useImage();
+  const { setImage } = useImage();
   let navigate = useNavigate();
   let { setPlayerColorArray } = usePlayerColor()
 
@@ -17,7 +17,7 @@ export default function LogoutButton() {
     setError("");
 
     try {
-      removeImage()
+      setImage(null)
       await logout();
       setPlayerColorArray()
       navigate("/login");

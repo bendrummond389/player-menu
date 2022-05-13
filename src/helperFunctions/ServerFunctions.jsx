@@ -7,7 +7,6 @@ export async function addNewUser(userId) {
     body: JSON.stringify({
       id: userId,
       colors: ["none", "none", "none", "none"],
-      url: "hi",
     }),
   });
   console.log(res);
@@ -23,7 +22,6 @@ export async function updateArrayOnServer(userId, playerColorArray) {
       body: JSON.stringify({
         id: userId,
         colors: playerColorArray,
-        url: "http://hello.com",
       }),
     });
   } catch (err) {
@@ -38,6 +36,30 @@ export async function loadArrayFromServer(userId) {
 }
 
 
-export async function addImageToServer(userId) {
-  
+export async function uploadImageToServer(userId, imgBase64) {
+  try {
+    const res = await fetch("http://localhost:5000/upload", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userId,
+        image: imgBase64
+      }),
+    });
+  } catch (err) {
+    console.error(err);
+  }
 }
+
+export async function loadImageFromServer(userId) {
+  const res = await fetch("http://localhost:5000/byId/" + userId);
+  const data = await res.json();
+  return data.image;
+}
+
+
+
+
+
