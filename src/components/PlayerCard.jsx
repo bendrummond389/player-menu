@@ -8,22 +8,23 @@ import { usePlayerColor } from "../contexts/PlayerColorContext";
 
 function PlayerCard(props) {
   const { playerColorArray, getColorFromArray, loading } = usePlayerColor();
+  const [color, setColor] = useState();
+  const index = props.id
 
-  let playerColor = "";
   useEffect(() => {
-    playerColor = getColorFromArray(props.id);
-  }, [playerColorArray]);
-
+    setColor(getColorFromArray(index))
+  })
+  
   return (
     <Grid item>
         <Card>
           <Typography variant="h4">Player {props.id}</Typography>
-          <CardMedia
+          {!loading && <CardMedia
             component="img"
             height="140"
             image="https://i.stack.imgur.com/l60Hf.png"
-            className={playerColor}
-          />
+            className={color}
+          />}
           <CardContent>
             <DropdownMenu id={props.id} />
           </CardContent>

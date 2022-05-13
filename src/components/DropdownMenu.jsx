@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AvailableColorsContext } from "../contexts/AvailableColorsContext";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { usePlayerColor } from "../contexts/PlayerColorContext";
+import { useAuth } from "../contexts/AuthContext";
 
 function DropdownMenu(props) {
   const { getColorFromArray, updateColorInArray } = usePlayerColor();
@@ -16,7 +17,7 @@ function DropdownMenu(props) {
   const [loaded, setLoaded] = useState(true);
 
   const toggleAvailableColors = (value) => {
-    if(playerColor != "none"){
+    if (playerColor != "none") {
       let newArray = [...availableColors];
       let index = availableColors.findIndex(
         (color) => color.value === playerColor
@@ -24,22 +25,23 @@ function DropdownMenu(props) {
       newArray[index].available = value;
       setAvailableColors(newArray);
     }
-  }
-
-  useEffect(() => {
-    updateColorInArray(index, playerColor)
-    toggleAvailableColors(false)
-    // eslint-disable-next-line
-  }, [playerColor]);
-
+  };
+  
   const handleChange = (e) => {
     if (playerColor) {
       toggleAvailableColors(true);
     }
-    setPlayerColor(e.target.value)
-    // updateColorInArray(index, playerColor)
+    setPlayerColor(e.target.value);
+    console.log(playerColor);
   };
-
+  
+  useEffect(() => {
+    if (playerColor) {
+      updateColorInArray(index, playerColor);
+    }
+    toggleAvailableColors(false);
+    // eslint-disable-next-line
+  }, [playerColor]);
 
   let colorList = availableColors.map((color) => (
     <MenuItem

@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase'
+import { addNewUser } from '../helperFunctions/ServerFunctions'
  
 
 const AuthContext = createContext()
@@ -13,7 +14,7 @@ export function AuthProvider({children}) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
    
-  function signup(email, password){
+  async function signup(email, password){
     return createUserWithEmailAndPassword(auth, email, password)
   }
 

@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useImage } from "../contexts/ImageContext"
+import { usePlayerColor } from "../contexts/PlayerColorContext";
+
 
 export default function LogoutButton() {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const { removeImage } = useImage();
   let navigate = useNavigate();
+  let { setPlayerColorArray } = usePlayerColor()
 
   async function handleLogout() {
     setError("");
@@ -16,6 +19,7 @@ export default function LogoutButton() {
     try {
       removeImage()
       await logout();
+      setPlayerColorArray()
       navigate("/login");
     } catch {
       setError("log out unsuccessful");

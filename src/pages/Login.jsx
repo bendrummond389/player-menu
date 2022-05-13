@@ -9,10 +9,13 @@ import {
   Alert,
 } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
+import { usePlayerColor } from "../contexts/PlayerColorContext";
 import { Link, useNavigate } from "react-router-dom";
+import { loadArrayFromServer } from "../helperFunctions/ServerFunctions";
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
+  const { setPlayerColorArray } = usePlayerColor()
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
@@ -24,8 +27,10 @@ export default function Login() {
     try {
       setError("");
       setLoading(true);
-      await login(data.get("email"), data.get("password"));
+      const credentials = await login(data.get("email"), data.get("password"));
+      const loadedArray = await loadArrayFromServer(credentials.user.uid)
       navigate('/')
+      setPlayerColorArray(loadedArray)
     } catch {
       setError("Failed to sign in");
     }

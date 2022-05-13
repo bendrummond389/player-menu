@@ -8,14 +8,17 @@ import {
   Container,
   Alert,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { addNewUser } from "../helperFunctions/ServerFunctions";
+import { usePlayerColor } from "../contexts/PlayerColorContext";
 
 export default function Signup() {
-  const { signup } = useAuth();
+  const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  let navigate = useNavigate()
+  const { setPlayerColorArray } = usePlayerColor();
+  let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,8 +31,10 @@ export default function Signup() {
     try {
       setError("");
       setLoading(true);
-      await signup(data.get("email"), data.get("password"));
-      navigate('/')
+      const credentials = await signup(data.get("email"), data.get("password"));
+      addNewUser(credentials.user.uid);
+      setPlayerColorArray(["none", "none", "none", "none"]);
+      navigate("/");
     } catch {
       setError("Failed to create account");
     }
@@ -99,7 +104,7 @@ export default function Signup() {
             </Button>
           </Box>
         </Card>
-          Already have an account? <Link to="/login">Log In</Link>
+        Already have an account? <Link to="/login">Log In</Link>
       </Box>
     </Container>
   );

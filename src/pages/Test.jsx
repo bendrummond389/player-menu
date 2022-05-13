@@ -3,27 +3,43 @@ import React from "react";
 import axios from "axios";
 import { Box, Button } from "@mui/material";
 import { async } from "@firebase/util";
+import {
+  addNewUser,
+  updateArrayOnServer,
+} from "../helperFunctions/ServerFunctions";
 
 export default function Test() {
-  const fetchData = async (id) => {
-    try {
-      const res = await fetch("http://localhost:5000/byId/" + id);
-      const data = res.json();
-      return data;
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-  };
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file)
+    console.log(base64)
 
-  fetchData(123).then(data => console.log(data.colors[3]))
+  }
 
-  // const displayData = async (id) => {
-  //   const data = await fetchData(id);
+    const convertBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
 
-  //   return data.colors;
-  // };
-  return( <div>
-    
-    </div>);
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
+
+        fileReader.onerror = (error) => {
+          reject(error)
+        };
+        
+      });
+    };
+
+  return (
+    <div>
+      <input
+        type="file"
+        onChange={(e) => {
+          uploadImage(e);
+        }}
+      />
+    </div>
+  );
 }
